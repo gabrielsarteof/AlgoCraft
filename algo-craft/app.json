@@ -4,35 +4,34 @@
     "slug": "algo-craft",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",  
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "scheme": "algo-craft",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#02B8F5"
+    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#02B8F5"
       }
     },
     "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "splash": {
-      "image": "./assets/images/splash.png",  
-      "imageWidth": 200,
-      "resizeMode": "contain", 
-      "backgroundColor": "#02B8F5"  
+      "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font"
     ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    "assetBundlePatterns": [
+      "assets/fonts/**/*",
+      "assets/images/**/*"
+    ]
   }
 }
