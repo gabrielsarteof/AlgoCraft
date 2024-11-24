@@ -1,13 +1,22 @@
-import React from 'react';
-import { useFonts } from 'expo-font';  
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { Slot } from 'expo-router';  
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { ThemeProvider, useTheme } from '@/context/themeContext';  
-import { Colors } from '@/styles/Colors';  
+import { useEffect } from 'react';
+import 'react-native-reanimated';
 
-const Layout = () => {
-  const [fontsLoaded] = useFonts({
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { colors } from '@/styles/colors';
+import { Slot } from 'expo-router';
+import { View, StyleSheet, ColorSchemeName } from 'react-native';
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
+
+export default function RootLayout() {
+  const colorScheme: ColorSchemeName = useColorScheme();
+  console.log('Color Scheme:', colorScheme);
+  const [loaded] = useFonts({
     'Righteous': require('@assets/fonts/Righteous/Righteous-Regular.ttf'),
     'Roboto-Regular': require('@assets/fonts/Roboto/Roboto-Regular.ttf'),
     'Roboto-Bold': require('@assets/fonts/Roboto/Roboto-Bold.ttf'),
@@ -15,22 +24,24 @@ const Layout = () => {
     'Roboto-Medium': require('@assets/fonts/Roboto/Roboto-Medium.ttf'),
   });
 
-  const { theme } = useTheme();  
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
 
-  if (!fontsLoaded) {
-    return (
-      <View style={[styles.loadingContainer, { backgroundColor: Colors[theme].background }]}>
-        <ActivityIndicator size="large" color={Colors[theme].tint} />
-        <Text style={{ color: Colors[theme].text }}>Carregando fontes...</Text>
-      </View>
-    );
+  if (!loaded) {
+    return null;
   }
 
+  // Ajuste para garantir que o ThemeProvider englobe toda a navegação
   return (
-    <View style={[styles.container, { backgroundColor: Colors[theme].background }]}>
-      <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
-      <Slot />
-    </View>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <View style={[styles.container, { backgroundColor: colors[colorScheme ?? 'light'].background }]}>
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        <Slot />
+      </View>
+    </ThemeProvider>
   );
 };
 
@@ -47,11 +58,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default function App() {
-  return (
-    <ThemeProvider>
-      <Layout />
-    </ThemeProvider>
-  );
-}

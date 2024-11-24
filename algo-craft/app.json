@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "scheme": "algo-craft",
     "splash": {
@@ -14,9 +14,11 @@
       "backgroundColor": "#02B8F5"
     },
     "ios": {
+      "userInterfaceStyle": "automatic",
       "supportsTablet": true
     },
     "android": {
+      "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#02B8F5"

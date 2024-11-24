@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TouchableOpacityProps, ActivityIndicator, Animated } from 'react-native';
-import { useTheme } from '@/context/themeContext'; // Importando o hook do tema
-import { blueButtonStyles } from '@/styles/BlueButtonStyles';
-import { Colors } from '@/styles/Colors';
+import { View, Text, TouchableOpacity, TouchableOpacityProps, ActivityIndicator, Animated, ColorSchemeName, useColorScheme } from 'react-native';
+import { blueButtonStyles } from '@/styles/blueButtonStyles';
+import { colors } from '@/styles/colors';
 
 type Props = TouchableOpacityProps & {
   title: string;
@@ -10,7 +9,7 @@ type Props = TouchableOpacityProps & {
 };
 
 export function BlueButton({ title, isLoading = false, ...rest }: Props) {
-  const { theme } = useTheme();
+  const colorScheme: ColorSchemeName = useColorScheme() ?? 'light';
   const [scale] = useState(new Animated.Value(1));  
   const [isPressed, setIsPressed] = useState(false); 
 
@@ -32,12 +31,12 @@ export function BlueButton({ title, isLoading = false, ...rest }: Props) {
   };
 
   const buttonColors = {
-    top: theme === 'light' 
-      ? (isPressed ? Colors.blue[600] : Colors.blue[500]) 
-      : (isPressed ? Colors.blue[700] : Colors.blue[600]),
-    bottom: theme === 'light' 
-      ? (isPressed ? Colors.blue[700] : Colors.blue[600]) 
-      : (isPressed ? Colors.blue[800] : Colors.blue[700]),
+    top: colorScheme === 'light' 
+      ? (isPressed ? colors.blue[600] : colors.blue[500]) 
+      : (isPressed ? colors.blue[700] : colors.blue[600]),
+    bottom: colorScheme === 'light' 
+      ? (isPressed ? colors.blue[700] : colors.blue[600]) 
+      : (isPressed ? colors.blue[800] : colors.blue[700]),
   };
 
   return (
@@ -49,13 +48,13 @@ export function BlueButton({ title, isLoading = false, ...rest }: Props) {
       {...rest}
     >
       <Animated.View 
-        style={[blueButtonStyles(theme).buttonBottom, { backgroundColor: buttonColors.bottom, transform: [{ scale }] }]}  
+        style={[blueButtonStyles(colorScheme).buttonBottom, { backgroundColor: buttonColors.bottom, transform: [{ scale }] }]}  
       >
-        <View style={[blueButtonStyles(theme).buttonTop, { backgroundColor: buttonColors.top }]}>
+        <View style={[blueButtonStyles(colorScheme).buttonTop, { backgroundColor: buttonColors.top }]}>
           {isLoading ? (
-            <ActivityIndicator size="small" color={theme === 'dark' ? Colors.dark.text : Colors.light.text} />
+            <ActivityIndicator size="small" color={colorScheme === 'dark' ? colors.dark.text : colors.light.text} />
           ) : (
-            <Text style={blueButtonStyles(theme).buttonText}>
+            <Text style={blueButtonStyles(colorScheme).buttonText}>
               {title}
             </Text>
           )}

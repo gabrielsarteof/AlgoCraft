@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from './Colors'; 
+import { colors } from './colors'; 
 
 export const typography = (theme: 'light' | 'dark') =>
   StyleSheet.create({
@@ -7,35 +7,41 @@ export const typography = (theme: 'light' | 'dark') =>
       fontFamily: 'Righteous',  
       fontSize: 48,
       textAlign: 'center',
-      color: theme === 'dark' ? Colors.blue[600] : Colors.blue[500], 
+      color: theme === 'dark' ? colors.blue[600] : colors.blue[500], 
     },
 
     title: {
       fontFamily: 'Roboto-Bold',  
       fontSize: 32,
       textAlign: 'center',
-      color: theme === 'dark' ? Colors.light.text : Colors.dark.text, 
+      color: theme === 'dark' ? colors.light.text : colors.dark.text, 
     },
 
     subtitle: {
       fontFamily: 'Roboto-Medium',  
       fontSize: 24,
       textAlign: 'center',
-      color: theme === 'dark' ? Colors.gray[200] : Colors.gray[200], 
+      color: theme === 'dark' ? colors.gray[200] : colors.gray[200], 
     },
 
     text: {
       fontFamily: 'Roboto-Regular',  
       fontSize: 16,
       textAlign: 'left',
-      color: theme === 'dark' ? Colors.light.text : Colors.dark.text, 
+      color: theme === 'dark' ? colors.light.text : colors.dark.text, 
     },
 
     slogan: {
       fontFamily: 'Roboto-Light',    
       fontSize: 16,
       textAlign: 'center',
-      color: theme === 'dark' ? Colors.gray[400] : Colors.gray[500], 
+      color: theme === 'dark' ? colors.gray[400] : colors.gray[500], 
+    },
+    linkText: {
+      fontFamily: 'Roboto-Regular',    
+      fontSize: 18,
+      textAlign: 'center',
+      color: theme === 'dark' ? colors.blue[600] : colors.blue[500],
     },
   });
 

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
-import { Colors } from '@/styles/Colors';
+import { colors } from '@/styles/colors';
 
 // Definir o tipo de estado do tema
 type Theme = 'light' | 'dark';
