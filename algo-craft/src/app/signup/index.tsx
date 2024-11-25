@@ -9,7 +9,6 @@ import { Input } from '@/components/ui/Input';
 import { colors } from '@/styles/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default function SignUpScreen() {
   const colorScheme: ColorSchemeName = useColorScheme() ?? 'light';

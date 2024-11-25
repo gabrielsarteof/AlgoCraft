@@ -24,8 +24,9 @@ export const colors = {
     tabIconSelected: tintColorDark,
   },
   blue: {
-    100: '#B6EBFF',
-    200: '#76DDFF',
+    100: '#DEF4FF',
+    200: '#B6EBFF',
+    250: '#76DDFF',
     300: '#2DCDFF',
     400: '#02B8F5',
     500: '#01A6E4',
@@ -41,6 +42,7 @@ export const colors = {
     500: '#696D8E',
     600: '#444560',
     700: '#353545',
+    750: "#202024",
     800: '#16161D',
     900: '#111111'
   },

@@ -5,7 +5,6 @@ import { useRouter } from 'expo-router'; // Importar o hook useRouter
 import homeScreenStyles from '@/styles/homeScreenStyles';  // Importando o arquivo de estilos
 import typography from '@/styles/typography';
 import { BlueButton } from '@/components/ui/BlueButton';
-import { ToggleThemeButton } from '@/components/ui/ToggleThemeButton';
 import { Spacer } from '@/components/Spacer';
 
 export default function HomeScreen() {
@@ -14,7 +13,7 @@ export default function HomeScreen() {
   const colorScheme: ColorSchemeName = useColorScheme() ?? 'light';
   
   const handleAccessSignIn= () => {
-    router.push('/'); 
+    router.push('/custom'); 
   };
 
   

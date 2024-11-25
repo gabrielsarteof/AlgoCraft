@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TouchableOpacityProps, ActivityIndicator, Animated, ColorSchemeName, useColorScheme } from 'react-native';
 import { blueButtonStyles } from '@/styles/blueButtonStyles';
 import { colors } from '@/styles/colors';
+import typography from '@/styles/typography';
 
 type Props = TouchableOpacityProps & {
   title: string;
@@ -54,7 +55,7 @@ export function BlueButton({ title, isLoading = false, ...rest }: Props) {
           {isLoading ? (
             <ActivityIndicator size="small" color={colorScheme === 'dark' ? colors.dark.text : colors.light.text} />
           ) : (
-            <Text style={blueButtonStyles(colorScheme).buttonText}>
+            <Text style={typography(colorScheme).ButtonText}>
               {title}
             </Text>
           )}

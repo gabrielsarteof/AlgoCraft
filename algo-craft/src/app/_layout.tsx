@@ -15,13 +15,13 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme: ColorSchemeName = useColorScheme();
-  console.log('Color Scheme:', colorScheme);
   const [loaded] = useFonts({
     'Righteous': require('@assets/fonts/Righteous/Righteous-Regular.ttf'),
     'Roboto-Regular': require('@assets/fonts/Roboto/Roboto-Regular.ttf'),
     'Roboto-Bold': require('@assets/fonts/Roboto/Roboto-Bold.ttf'),
     'Roboto-Light': require('@assets/fonts/Roboto/Roboto-Light.ttf'),
     'Roboto-Medium': require('@assets/fonts/Roboto/Roboto-Medium.ttf'),
+    'Nunito-ExtraBold': require('@assets/fonts/Nunito/Nunito-ExtraBold.ttf')
   });
 
   useEffect(() => {
