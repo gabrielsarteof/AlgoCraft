@@ -3,20 +3,19 @@ import { View, Text, TouchableOpacity, TouchableOpacityProps, ActivityIndicator,
 import { blueButtonStyles } from '@/styles/blueButtonStyles';
 import { colors } from '@/styles/colors';
 import typography from '@/styles/typography';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type Props = TouchableOpacityProps & {
   title: string;
   isLoading?: boolean;
-  disabled?: boolean; 
 };
 
-export function BlueButton({ title, isLoading = false, disabled = false, ...rest }: Props) {
+export function RedButton({ title, isLoading = false, ...rest }: Props) {
   const colorScheme: ColorSchemeName = useColorScheme() ?? 'light';
   const [scale] = useState(new Animated.Value(1));  
   const [isPressed, setIsPressed] = useState(false); 
 
   const handlePressIn = () => {
+    
     Animated.spring(scale, {
       toValue: 0.95,  
       useNativeDriver: true,
@@ -34,17 +33,17 @@ export function BlueButton({ title, isLoading = false, disabled = false, ...rest
 
   const buttonColors = {
     top: colorScheme === 'light' 
-      ? (isPressed ? colors.blue[600] : (disabled ? colors.grayBlue[400] : colors.blue[500])) 
-      : (isPressed ? colors.blue[700] : (disabled ? colors.grayBlue[600] : colors.blue[600])),
+      ? (isPressed ? colors.red[450] : colors.red[400]) 
+      : (isPressed ? colors.red[500] : colors.red[450]),
     bottom: colorScheme === 'light' 
-      ? (isPressed ? colors.blue[700] : (disabled ? colors.grayBlue[500] : colors.blue[600])) 
-      : (isPressed ? colors.blue[800] : (disabled ? colors.grayBlue[700] : colors.blue[700])),
+      ? (isPressed ? colors.red[600] : colors.red[500]) 
+      : (isPressed ? colors.red[700] : colors.red[600]),
   };
 
   return (
     <TouchableOpacity 
       activeOpacity={1} 
-      disabled={disabled || isLoading} 
+      disabled={isLoading} 
       onPressIn={handlePressIn}  
       onPressOut={handlePressOut}  
       {...rest}
@@ -53,12 +52,8 @@ export function BlueButton({ title, isLoading = false, disabled = false, ...rest
         style={[blueButtonStyles(colorScheme).buttonBottom, { backgroundColor: buttonColors.bottom, transform: [{ scale }] }]}  
       >
         <View style={[blueButtonStyles(colorScheme).buttonTop, { backgroundColor: buttonColors.top }]}>
-          {isLoading || disabled ? ( 
-            <MaterialCommunityIcons
-            name="window-close"
-            color={colorScheme === 'dark' ? colors.gray[800] : colors.gray[100]}
-            size={24}
-          />
+          {isLoading ? (
+            <ActivityIndicator size="small" color={colorScheme === 'dark' ? colors.dark.text : colors.light.text} />
           ) : (
             <Text style={typography(colorScheme).ButtonText}>
               {title}

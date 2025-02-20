@@ -46,8 +46,14 @@ export const typography = (colorScheme: 'light' | 'dark') =>
     highLightText: {
       fontFamily: 'Nunito-ExtraBold',    
       fontSize: 20,
-      textAlign: 'center',
+      textAlign: 'justify',
       color: colorScheme === 'dark' ? colors.gray[400] : colors.gray[500], 
+    },
+    blueHighLightText: {
+      fontFamily: 'Nunito-ExtraBold',    
+      fontSize: 28,
+      textAlign: 'justify',
+      color: colorScheme === 'dark' ? colors.blue[600] : colors.blue[500], 
     },
     ButtonText: {
       fontFamily: 'Nunito-ExtraBold',    

@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ColorSchemeName, useColorScheme, Animated } from 'react-native';
-import {selectableOptionStyles} from '@/styles/selectableOptionStyles';
+import { View, Text, Image, TouchableOpacity, ColorSchemeName, useColorScheme, Animated, ViewStyle, TextStyle, ImageStyle } from 'react-native';
+import { selectableOptionStyles } from '@/styles/selectableOptionStyles';
 import { colors } from '@/styles/colors';
 
 type SelectableOptionProps = {
   text: string;
-  imageSource: any;
+  title?: string;
+  imageSource?: any; // Tornando imageSource opcional
   isSelected: boolean;
   onSelect: () => void;
+  isLarge?: boolean; 
+  showMessage?: string;
 };
 
-export const SelectableOption: React.FC<SelectableOptionProps> = ({ text, imageSource, isSelected, onSelect }) => {
+export const SelectableOption: React.FC<SelectableOptionProps> = ({
+  text,
+  title, 
+  imageSource, 
+  isSelected, 
+  onSelect, 
+  isLarge = false,
+  showMessage,
+}) => {
   const colorScheme: ColorSchemeName = useColorScheme() ?? 'light';
-  const [scale] = useState(new Animated.Value(1));  
+  const [scale] = useState(new Animated.Value(1));
   const [isPressed, setIsPressed] = useState(false); 
 
   const handlePressIn = () => {
@@ -32,12 +43,14 @@ export const SelectableOption: React.FC<SelectableOptionProps> = ({ text, imageS
   };
 
   const buttonColors = {
-    top: colorScheme === 'light' 
-    ? (isSelected 
-        ? (isPressed ? colors.blue[200] : colors.blue[100])  
-        : (isPressed ? colors.gray[300] : colors.gray[100])) 
-    : (isPressed ? colors.gray[900] : colors.gray[800]),
-    
+    top: isSelected
+      ? (colorScheme === 'light' 
+          ? (isPressed ? colors.blue[200] : colors.blue[100]) 
+          : (isPressed ? colors.grayBlue[900] : colors.grayBlue[800]))
+      : (colorScheme === 'light' 
+          ? (isPressed ? colors.gray[300] : colors.gray[100]) 
+          : (isPressed ? colors.gray[900] : colors.gray[800])),
+
     bottom: isSelected 
       ? (colorScheme === 'light' 
           ? (isPressed ? colors.blue[300] : colors.blue[250]) 
@@ -46,7 +59,12 @@ export const SelectableOption: React.FC<SelectableOptionProps> = ({ text, imageS
           ? (isPressed ? colors.gray[400] : colors.gray[300]) 
           : (isPressed ? colors.gray[750] : colors.gray[700])),
   };
-  
+
+  // Estilos específicos para o tamanho "grande"
+  const largeStyles = isLarge ? {
+    container: selectableOptionStyles(colorScheme).selectableOptionBottomLarge,
+    imageStyle: selectableOptionStyles(colorScheme).selectableOptionIconLarge,
+  } : {};
 
   return (
     <TouchableOpacity
@@ -58,6 +76,7 @@ export const SelectableOption: React.FC<SelectableOptionProps> = ({ text, imageS
       <Animated.View 
         style={[
           selectableOptionStyles(colorScheme).selectableOptionBottom, 
+          isLarge && selectableOptionStyles(colorScheme).selectableOptionBottomLarge, 
           isSelected && selectableOptionStyles(colorScheme).selectedOptionBottom,
           { 
             backgroundColor: buttonColors.bottom, 
@@ -67,19 +86,39 @@ export const SelectableOption: React.FC<SelectableOptionProps> = ({ text, imageS
       >
         <View style={[
           selectableOptionStyles(colorScheme).selectableOptionTop,
-          { backgroundColor: buttonColors.top } 
+          isLarge && selectableOptionStyles(colorScheme).selectableOptionTopLarge, 
+          { backgroundColor: buttonColors.top }
         ]}>
-          <Image 
-            source={imageSource} 
-            style={selectableOptionStyles(colorScheme).selectableOptionIcon} 
-            resizeMode="contain" 
-          />
-          <Text style={[
-            selectableOptionStyles(colorScheme).selectableOptionText, 
-            isSelected && selectableOptionStyles(colorScheme).selectedOptionText
-          ]}>
-            {text}
-          </Text>
+          {imageSource && (
+            <Image 
+              source={imageSource} 
+              style={[selectableOptionStyles(colorScheme).selectableOptionIcon, isLarge && largeStyles.imageStyle]} // Aplica estilo maior para imagem
+              resizeMode="contain" 
+            />
+          )}
+          <View style={selectableOptionStyles(colorScheme).textBox}>
+          {title && (
+              <Text style={[
+                selectableOptionStyles(colorScheme).selectableOptionTitle, 
+                isSelected && selectableOptionStyles(colorScheme).selectedOptionTitle
+              ]}>
+                {title}
+              </Text>
+            )}
+            <Text style={[
+              selectableOptionStyles(colorScheme).selectableOptionText, 
+              isSelected && selectableOptionStyles(colorScheme).selectedOptionText
+            ]}>
+              {text}
+            </Text>
+          </View>
+          {showMessage && (
+            <View style={[selectableOptionStyles(colorScheme).optionMessage]}>
+              <Text style={[selectableOptionStyles(colorScheme).optionMessageText]}>
+                {showMessage}
+              </Text>
+            </View>
+          )}
         </View>
       </Animated.View>
     </TouchableOpacity>

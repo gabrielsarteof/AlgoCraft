@@ -26,11 +26,11 @@ export default function SignInScreen() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleCreateAccount = () => {
-    router.push('/');
+    router.push('/main');
   };
 
   const handleGoBack = () => {
-    router.push('/');
+    router.back();
   };
 
   return (
@@ -117,13 +117,8 @@ export default function SignInScreen() {
 
       <View style={homeScreenStyles.bottombox}>
         <BlueButton
-          title="COMEÇAR AGORA"
+          title="CRIAR CONTA"
           onPress={handleCreateAccount}
-          isLoading={isLoading}
-        />
-        <BlueButton
-          title="JÁ TENHO UMA CONTA"
-          onPress={handleGoBack}
           isLoading={isLoading}
         />
       </View>

@@ -21,6 +21,7 @@ export default function RootLayout() {
     'Roboto-Bold': require('@assets/fonts/Roboto/Roboto-Bold.ttf'),
     'Roboto-Light': require('@assets/fonts/Roboto/Roboto-Light.ttf'),
     'Roboto-Medium': require('@assets/fonts/Roboto/Roboto-Medium.ttf'),
+    'Nunito-Bold': require('@assets/fonts/Nunito/Nunito-Bold.ttf'),
     'Nunito-ExtraBold': require('@assets/fonts/Nunito/Nunito-ExtraBold.ttf')
   });
 
@@ -34,7 +35,7 @@ export default function RootLayout() {
     return null;
   }
 
-  // Ajuste para garantir que o ThemeProvider englobe toda a navegação
+  
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <View style={[styles.container, { backgroundColor: colors[colorScheme ?? 'light'].background }]}>

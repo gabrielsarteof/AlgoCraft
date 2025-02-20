@@ -6,6 +6,7 @@ import homeScreenStyles from '@/styles/homeScreenStyles';  // Importando o arqui
 import typography from '@/styles/typography';
 import { BlueButton } from '@/components/ui/BlueButton';
 import { Spacer } from '@/components/Spacer';
+import { LessonButton } from '@/components/ui/LessonButton';
 
 export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +14,7 @@ export default function HomeScreen() {
   const colorScheme: ColorSchemeName = useColorScheme() ?? 'light';
   
   const handleAccessSignIn= () => {
-    router.push('/custom'); 
+    router.push('/begin'); 
   };
 
   
